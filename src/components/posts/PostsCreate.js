@@ -13,20 +13,32 @@ export default function PostsCreate() {
   };
 
   return (
-    <VStack spacing={4} p={4} maxW="900px" mx="auto">
-      <Box w="full" p={4} borderWidth={1} borderRadius="lg" boxShadow="sm">
+    <VStack spacing={4} mb={2}>
+      <Box
+        w="full"
+        p={4}
+        borderWidth={1} //
+        borderRadius="lg"
+        boxShadow="sm"
+        bg="white"
+        _dark={{ boxShadow: "md", bg: "gray.800" }}
+      >
         <Stack direction="row" spacing={4} align="center">
           <Avatar.Root cursor="pointer" borderWidth="2px" borderColor="blue.500" _hover={{ borderColor: "blue.600" }}>
             <Avatar.Fallback name="Random" />
             <Avatar.Image src="/imgs/avatar.png" />
           </Avatar.Root>
           <Textarea
-            placeholder="Bạn đang nghĩ gì?" //
+            placeholder="Bạn đang nghĩ gì?"
             value={content}
             onChange={(e) => setContent(e.target.value)}
             resize="none"
             p={3}
             borderRadius="md"
+            variant="outline" // Dùng variant có sẵn của Chakra UI
+            borderColor="gray.300" // Mặc định cho light mode
+            _dark={{ borderColor: "gray.600" }} // Đảm bảo border hiển thị trong dark mode
+            _focus={{ borderColor: "blue.500", boxShadow: "outline" }} // Hiệu ứng focus
           />
         </Stack>
         <Stack direction="row" justifyContent={"center"} spacing={4} mt={3}>
@@ -40,7 +52,7 @@ export default function PostsCreate() {
             <Icon as={FaSmile} /> Cảm xúc
           </Button>
         </Stack>
-        <Box textAlign={"center"} mt={2}>
+        <Box textAlign={"center"} my={2}>
           <Button colorScheme="blue" size="sm" px={8} onClick={handlePost} isDisabled={!content.trim()}>
             <Icon as={FaPaperPlane} /> Đăng
           </Button>

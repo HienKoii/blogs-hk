@@ -23,26 +23,28 @@ export default function UserPopover() {
       <Popover.Positioner>
         <Popover.Content width="220px" borderColor="gray.200" boxShadow="md" borderRadius="md">
           <Popover.Arrow />
-          <Popover.Body padding="4">
-            <List.Root spacing={3}>
+          <Popover.Body padding={4}>
+            <List.Root spacing={1} listStyleType="none">
               {menuItems.map((item, index) => (
-                <List.Item key={index} py={2} listStyle={"none"}>
-                  {item.href !== "#" ? (
-                    <>
-                      <Link as={NextLink} href={item.href} color="blue.500" fontWeight="medium" fontSize={"medium"}>
-                        <Stack direction="row" align="center" spacing={3} cursor="pointer" _hover={{ color: item.hoverColor || "blue.500" }}>
-                          <Icon as={item.icon} />
-                          <Text color={item.color || "gray.700"}>{item.label}</Text>
-                        </Stack>
-                      </Link>
-                      <Separator />
-                    </>
-                  ) : (
-                    <Stack direction="row" align="center" spacing={3} cursor="pointer" color={item.color || "gray.700"} _hover={{ color: item.hoverColor || "blue.500" }}>
-                      <Icon as={item.icon} />
-                      <Text>{item.label}</Text>
-                    </Stack>
-                  )}
+                <List.Item key={index} py={2} _notLast={{ borderBottom: "1px solid", borderColor: "gray.200" }}>
+                  <Stack
+                    as={item.href !== "#" ? NextLink : "div"}
+                    href={item.href !== "#" ? item.href : undefined}
+                    direction="row"
+                    align="center"
+                    spacing={3}
+                    px={3}
+                    py={2}
+                    borderRadius="md"
+                    cursor="pointer"
+                    _hover={{ bg: "gray.100", color: item.hoverColor || "blue.500" }}
+                    transition="all 0.2s"
+                  >
+                    <Icon as={item.icon} />
+                    <Text fontWeight="medium" color={item.color || "gray.700"}>
+                      {item.label}
+                    </Text>
+                  </Stack>
                 </List.Item>
               ))}
             </List.Root>
